@@ -67,7 +67,7 @@ description: Learn about the Smart Punctuation Converter and how it works
                 <h4>Basic Quotes</h4>
                 <div class="before-after">
                     <div>Before: <code>"Hello world"</code></div>
-                    <div>After: <code>"Hello world"</code></div>
+                    <div>After: <code>&#8220;Hello world&#8221;</code></div>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@ description: Learn about the Smart Punctuation Converter and how it works
                 <h4>Contractions</h4>
                 <div class="before-after">
                     <div>Before: <code>don't, can't, it's</code></div>
-                    <div>After: <code>don't, can't, it's</code></div>
+                    <div>After: <code>don&#8217;t, can&#8217;t, it&#8217;s</code></div>
                 </div>
             </div>
 
@@ -83,7 +83,7 @@ description: Learn about the Smart Punctuation Converter and how it works
                 <h4>Nested Quotes</h4>
                 <div class="before-after">
                     <div>Before: <code>He said, 'She told me "hello" yesterday.'</code></div>
-                    <div>After: <code>He said, 'She told me "hello" yesterday.'</code></div>
+                    <div>After: <code>He said, &#8216;She told me &#8220;hello&#8221; yesterday.&#8217;</code></div>
                 </div>
             </div>
 
@@ -91,7 +91,7 @@ description: Learn about the Smart Punctuation Converter and how it works
                 <h4>Possessives</h4>
                 <div class="before-after">
                     <div>Before: <code>James' car, the dogs' toys</code></div>
-                    <div>After: <code>James' car, the dogs' toys</code></div>
+                    <div>After: <code>James&#8217; car, the dogs&#8217; toys</code></div>
                 </div>
             </div>
         </div>
