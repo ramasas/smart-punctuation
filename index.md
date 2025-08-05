@@ -11,10 +11,10 @@ description: Convert straight quotes to elegant curved quotation marks with our 
         
         <div class="quote-examples">
             <strong>Example conversions:</strong> 
-            "straight quotes" → "curved quotes" | 
-            'single quotes' → 'curved singles' | 
-            don't → don't | 
-            it's → it's
+            "straight quotes" → &#8220;curved quotes&#8221; |
+            'single quotes' → &#8216;curved singles&#8217; |
+            don't → don&#8217;t |
+            it's → it&#8217;s
         </div>
     </div>
 </div>
