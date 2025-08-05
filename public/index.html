@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Punctuation Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 40px);
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            gap: 1px;
+            background: #e0e0e0;
+        }
+
+        .textarea-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .textarea-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1rem;
+        }
+
+        .input-header {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .output-header {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        textarea {
+            flex: 1;
+            border: none;
+            padding: 20px;
+            font-family: 'Courier New', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+            background: #fafafa;
+        }
+
+        #inputText {
+            background: #fafafa;
+        }
+
+        #outputText {
+            background: #f9f9f9;
+            color: #2e7d32;
+        }
+
+        .button-container {
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        #smartenButton {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        #smartenButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #smartenButton:active {
+            transform: translateY(0);
+        }
+
+        #smartenButton:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stats {
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .container {
+                height: auto;
+                min-height: calc(100vh - 40px);
+            }
+            
+            textarea {
+                min-height: 200px;
+            }
+        }
+
+        .loading {
+            opacity: 0.7;
+        }
+
+        .quote-examples {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 20px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .quote-examples strong {
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Smart Punctuation Converter</h1>
+            <p>Convert straight quotes to elegant curved quotation marks</p>
+        </div>
+        
+        <div class="quote-examples">
+            <strong>Example conversions:</strong> 
+            "straight quotes" → "curved quotes" | 
+            'single quotes' → 'curved singles' | 
+            don't → don't | 
+            it's → it's
+        </div>
+
+        <div class="content">
+            <div class="textarea-container">
+                <div class="textarea-header input-header">
+                    📝 Input Text
+                </div>
+                <textarea 
+                    id="inputText" 
+                    placeholder="Paste or type your text with mixed quotation marks here...
+
+Example:
+He said, 'I don't think "smart quotes" are being used properly in this text.' She replied, 'You're right! Let's fix that.'"
+                ></textarea>
+            </div>
+
+            <div class="textarea-container">
+                <div class="textarea-header output-header">
+                    ✨ Smartened Output
+                </div>
+                <textarea 
+                    id="outputText" 
+                    placeholder="Your converted text with smart quotes will appear here..."
+                    readonly
+                ></textarea>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button id="smartenButton">
+                Smarten Punctuation
+            </button>
+            <div class="stats" id="stats"></div>
+        </div>
+    </div>
+
+    <script>
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const smartenButton = document.getElementById('smartenButton');
+        const stats = document.getElementById('stats');
+
+        function updateStats(original, converted) {
+            const originalLength = original.length;
+            const changes = countChanges(original, converted);
+            
+            if (originalLength > 0) {
+                stats.textContent = `Processed ${originalLength} characters • ${changes} quote${changes !== 1 ? 's' : ''} converted`;
+            } else {
+                stats.textContent = '';
+            }
+        }
+
+        function countChanges(original, converted) {
+            let changes = 0;
+            const straightQuotes = /['"]/g;
+            const originalMatches = (original.match(straightQuotes) || []).length;
+            const convertedMatches = (converted.match(straightQuotes) || []).length;
+            return originalMatches - convertedMatches;
+        }
+
+        async function smartenPunctuation() {
+            const text = inputText.value;
+            
+            if (!text.trim()) {
+                outputText.value = '';
+                updateStats('', '');
+                return;
+            }
+
+            smartenButton.disabled = true;
+            smartenButton.textContent = 'Processing...';
+            document.body.classList.add('loading');
+
+            try {
+                console.log('Sending request with text:', text.substring(0, 50) + '...');
+                
+                const response = await fetch('/api/smarten', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: text })
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                    throw new Error(`Server error (${response.status}): ${errorData.error || 'Unknown error'}`);
+                }
+
+                const data = await response.json();
+                
+                if (!data.result && data.result !== '') {
+                    throw new Error('Invalid response from server');
+                }
+                
+                outputText.value = data.result;
+                updateStats(text, data.result);
+                
+                // Auto-select output text for easy copying
+                setTimeout(() => {
+                    outputText.select();
+                }, 100);
+                
+            } catch (error) {
+                console.error('Error details:', error);
+                outputText.value = `Error: ${error.message}\n\nPlease check that the server is running and try again.`;
+                stats.textContent = 'Conversion failed';
+            } finally {
+                smartenButton.disabled = false;
+                smartenButton.textContent = 'Smarten Punctuation';
+                document.body.classList.remove('loading');
+            }
+        }
+
+        // Event listeners
+        smartenButton.addEventListener('click', smartenPunctuation);
+
+        // Allow Enter+Ctrl/Cmd to trigger conversion
+        inputText.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                smartenPunctuation();
+            }
+        });
+
+        // Real-time character count
+        inputText.addEventListener('input', () => {
+            const length = inputText.value.length;
+            if (length > 0 && !outputText.value) {
+                stats.textContent = `${length} characters • Press button to convert`;
+            } else if (length === 0) {
+                stats.textContent = '';
+                outputText.value = '';
+            }
+        });
+
+        // Auto-resize textareas based on content
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        inputText.addEventListener('input', () => autoResize(inputText));
+        outputText.addEventListener('input', () => autoResize(outputText));
+    </script>
+</body>
+</html>
