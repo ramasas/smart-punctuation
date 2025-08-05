@@ -1,0 +1,40 @@
+# _config.yml
+title: Smart Punctuation Converter
+description: Convert straight quotes to elegant curved quotation marks
+url: "https://YOUR_USERNAME.github.io"
+baseurl: "/smart-punctuation"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude files from processing
+exclude:
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - server.js
+  - public/
+  - README.md
+  - .gitignore
+
+# Site settings
+author: Ramasas
+github_username: ramasas
+
+# Custom variables
+app:
+  name: "Smart Punctuation Converter"
+  version: "1.0.0"
+  description: "Inspired by Calibre's Smarten Punctuation feature"
+
+# Collections (if you want to add blog posts or docs later)
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/

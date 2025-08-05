@@ -2,7 +2,7 @@
 
 A web application that converts straight quotes to elegant curved quotation marks, inspired by Calibre eBook's "Smarten Punctuation" feature.
 
-![Node.js](https://img.shields.io/badge/node.js-v14+-blue) ![License](https://img.shields.io/badge/license-GNU-green)
+![Node.js](https://img.shields.io/badge/node.js-v14+-blue) ![License](https://img.shields.io/badge/license-GPL-green)
 
 ## Features
 
@@ -145,7 +145,7 @@ npm start
 ```
 ## License
 
-This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 

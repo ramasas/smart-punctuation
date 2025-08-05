@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+  <!-- SEO and Open Graph -->
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
+
+  <!-- Jekyll SEO plugin -->
+  {% seo %}
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="{{ '/' | relative_url }}" class="nav-brand">
+          {{ site.app.name }}
+        </a>
+        <div class="nav-links">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/about' | relative_url }}">About</a>
+          <a href="https://github.com/{{ site.github_username }}/smart-punctuation" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>
+        Inspired by <a href="https://calibre-ebook.com/" target="_blank">Calibre eBook</a>'s Smarten Punctuation •
+        Made with ❤️ for better typography •
+        <a href="https://github.com/{{ site.github_username }}/smart-punctuation" target="_blank">Open Source</a>
+      </p>
+      <p class="version">Version {{ site.app.version }}</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ '/assets/js/smart-punctuation.js' | relative_url }}"></script>
+  {% if page.custom_js %}
+  {% for js_file in page.custom_js %}
+  <script src="{{ '/assets/js/' | append: js_file | relative_url }}"></script>
+  {% endfor %}
+  {% endif %}
+</body>
+</html>
