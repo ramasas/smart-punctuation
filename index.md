@@ -6,8 +6,6 @@ description: Convert straight quotes to elegant curved quotation marks with our 
 
 <div class="hero-section">
     <div class="container">
-        <p class="hero-subtitle">{{ site.app.description }}</p>
-        
         <div class="quote-examples">
             <strong>Example conversions:</strong> 
             "straight quotes" → &#8220;curved quotes&#8221; |

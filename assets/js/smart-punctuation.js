@@ -112,7 +112,7 @@
                 font-weight: 500;
                 z-index: 1000;
                 transition: all 0.3s ease;
-                transform: translateX(100%);
+                transform: translateX(120%);
             `;
       document.body.appendChild(feedback);
     }
