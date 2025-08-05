@@ -6,29 +6,30 @@
 
   // Smart punctuation conversion function
   function smartenPunctuation(text) {
+    // Replace straight quotes with smart quotes
     let result = text;
 
     // Handle double quotes
     // Opening double quote: at start of line, after whitespace, or after opening punctuation
-    result = result.replace(/(^|[\s\(\[\{])"/g, '$1"');
+    result = result.replace(/(^|[\s\(\[\{])"/g, '$1\u201C');
     // Closing double quote: everything else
-    result = result.replace(/"/g, '"');
+    result = result.replace(/"/g, '\u201D');
 
     // Handle single quotes/apostrophes
     // Apostrophes in contractions (letter + ' + letter)
-    result = result.replace(/([a-zA-Z])'([a-zA-Z])/g, '$1'$2');
-        // Opening single quote: at start of line, after whitespace, or after opening punctuation
-        result = result.replace(/(^|[\s\(\[\{])'/g, '$1'');
-        // Closing single quote: everything else
-        result = result.replace(/'/g, ''');
+    result = result.replace(/([a-zA-Z])'([a-zA-Z])/g, '$1\u2019$2');
+    // Opening single quote: at start of line, after whitespace, or after opening punctuation
+    result = result.replace(/(^|[\s\(\[\{])'/g, '$1\u2018');
+    // Closing single quote: everything else
+    result = result.replace(/'/g, '\u2019');
 
-        // Fix common patterns that might have been incorrectly converted
-        // Possessives at end of words ending in 's'
-        result = result.replace(/([a-zA-Z]s)'(\s|$|[^\w])/g, '$1'$2');
-        // Years like '90s
-        result = result.replace(/(\s|^)'(\d)/g, '$1'$2');
-        
-        return result;
+    // Fix common patterns that might have been incorrectly converted
+    // Possessives at end of words ending in 's'
+    result = result.replace(/([a-zA-Z]s)\u2019(\s|$|[^\w])/g, '$1\u2019$2');
+    // Years like '90s
+    result = result.replace(/(\s|^)\u2018(\d)/g, '$1\u2019$2');
+
+    return result;
   }
 
   // Utility functions

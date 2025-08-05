@@ -6,7 +6,6 @@ description: Convert straight quotes to elegant curved quotation marks with our 
 
 <div class="hero-section">
     <div class="container">
-        <h1 class="hero-title">{{ site.app.name }}</h1>
         <p class="hero-subtitle">{{ site.app.description }}</p>
         
         <div class="quote-examples">
@@ -51,29 +50,5 @@ He said, 'I don't think &quot;smart quotes&quot; are being used properly in this
             Smarten Punctuation
         </button>
         <div class="stats" id="stats"></div>
-    </div>
-</div>
-
-<div class="features-section">
-    <div class="container">
-        <h2>Features</h2>
-        <div class="features-grid">
-            <div class="feature">
-                <h3>🎯 Context-Aware</h3>
-                <p>Intelligently distinguishes between opening and closing quotes based on context.</p>
-            </div>
-            <div class="feature">
-                <h3>📱 Responsive Design</h3>
-                <p>Works seamlessly on desktop, tablet, and mobile devices.</p>
-            </div>
-            <div class="feature">
-                <h3>⚡ Instant Processing</h3>
-                <p>Real-time conversion with live statistics and character count.</p>
-            </div>
-            <div class="feature">
-                <h3>📋 Copy-Friendly</h3>
-                <p>Auto-selects output text for easy copying to clipboard.</p>
-            </div>
-        </div>
     </div>
 </div>

@@ -1,4 +1,13 @@
-# _config.yml
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+## _config.yml
 title: Smart Punctuation Converter
 description: Convert straight quotes to elegant curved quotation marks
 url: "https://YOUR_USERNAME.github.io"
@@ -12,6 +21,10 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+
+# SCSS Configuration for assets/css/style.scss
+sass:
+  style: compressed  # Remove sass_dir since we're using assets/css/
 
 # Exclude files from processing
 exclude:
@@ -31,9 +44,8 @@ exclude:
   - gemfiles/
 
 # Site settings
-author: Your Name
-email: your-email@example.com
-github_username: YOUR_USERNAME
+author: Ramasas
+github_username: ramasas
 
 # Custom variables
 app:
